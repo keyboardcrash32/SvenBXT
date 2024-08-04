@@ -52,9 +52,7 @@ set(MAIN_FILES
     SvenBXT.h
     Utils.cpp
     Utils.h
-    hlsdk_mini.hpp
-    interprocess.cpp
-    interprocess.h)
+    hlsdk_mini.hpp)
 
 source_group("cl_dll" FILES ${CLIENT_FILES})
 source_group("dlls" FILES ${SERVER_FILES})
