@@ -9,10 +9,12 @@
 
 namespace Interprocess
 {
+#ifdef PLATFORM_WINDOWS
 	static HANDLE pipe_SvenSplit = INVALID_HANDLE_VALUE;
 	static OVERLAPPED overlapped;
 	static bool writing_to_pipe;
-	
+#endif
+
 	static void InitSvenSplitPipe()
 	{
 #ifdef PLATFORM_WINDOWS
@@ -259,6 +261,8 @@ namespace Interprocess
 			static_cast<uint8_t>(seconds),
 			static_cast<uint16_t>(milliseconds)
 		};
+#else
+		return 0;
 #endif
 	}
 }
