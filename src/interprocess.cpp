@@ -262,7 +262,7 @@ namespace Interprocess
 			static_cast<uint16_t>(milliseconds)
 		};
 #else
-		return 0;
+		return Interprocess::Time{ 0, 0, 0, 0 };
 #endif
 	}
 }
