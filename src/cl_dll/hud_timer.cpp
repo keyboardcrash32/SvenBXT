@@ -50,6 +50,7 @@ int __MsgFunc_BXTTimer(const char* pszName, int iSize, void* pbuf)
 	bool stop = READ_BYTE();
 
 	g_RTATimer.SyncTimer(time, stop);
+	Interprocess::WriteTime(Interprocess::GetTime());
 
 	return 0;
 }
@@ -64,6 +65,9 @@ int CHudTimer::Init()
 	hud_timer = CVAR_CREATE("sbxt_hud_timer", "0", 0);
 	hud_timer_anchor = CVAR_CREATE("sbxt_hud_timer_anchor", "0.0 0.5", 0);
 	hud_timer_offset = CVAR_CREATE("sbxt_hud_timer_offset", "", 0);
+
+	svensplit_time_update_frequency = CVAR_CREATE("_sbxt_svensplit_time_update_frequency", "41", 0);
+	interprocess_enable = CVAR_CREATE("sbxt_interprocess_enable", "0", 0);
 
 	HOOK_COMMAND("sbxt_timer_start", TimerStart);
 	HOOK_COMMAND("sbxt_timer_stop", TimerStop);
@@ -81,6 +85,8 @@ int CHudTimer::VidInit()
 
 int CHudTimer::Draw(float time)
 {
+	Interprocess::WriteTime(Interprocess::GetTime());
+
 	if (!hud_timer->value)
 		return 0;
 
@@ -91,7 +97,7 @@ int CHudTimer::Draw(float time)
 	int minutes = g_RTATimer.GetMinutes();
 	int seconds = g_RTATimer.GetSeconds();
 	int milliseconds = g_RTATimer.GetMilliseconds();
-
+	
 	if (hud_timer->value == 1)
 	{
 		char rta_timer[64];
@@ -135,6 +141,8 @@ void CHudTimer::TimerStart()
 	g_RTATimer.StartTimer();
 	//g_IGTTimer.StartTimer();
 
+	Interprocess::WriteTimerStart(Interprocess::GetTime());
+
 	if (UTIL_IsHost())
 	{
 		SV_SyncTimer();
@@ -156,6 +164,8 @@ void CHudTimer::TimerReset()
 {
 	g_RTATimer.ResetTimer();
 	//g_IGTTimer.ResetTimer();
+
+	Interprocess::WriteTimerReset(Interprocess::GetTime());
 
 	if (UTIL_IsHost())
 	{

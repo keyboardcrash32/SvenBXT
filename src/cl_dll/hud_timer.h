@@ -27,6 +27,9 @@ public:
 	bool ShouldSync() { return (hud_timer_serversync->value && !UTIL_IsHost()); }
 	bool IsInILMode() { return hud_timer_il_mode->value; };
 
+	cvar_t* svensplit_time_update_frequency;
+	cvar_t* interprocess_enable;
+
 private:
 	cvar_t* hud_timer_serversync;
 	cvar_t* hud_timer_il_mode;

@@ -90,6 +90,9 @@ void CL_Initialize()
 	CreateHook(Client, V_CalcRefdef);
 	CreateHook(Client, HUD_VidInit);
 	CreateHook(Client, HUD_Redraw);
+
+	TRACE("Initializing interprocesses...\n");
+	Interprocess::Initialize();
 	
 	TRACE("Initializing HUD...\n");
 	gBXTHud.Init();

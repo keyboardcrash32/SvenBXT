@@ -14,6 +14,26 @@
 #define SVENBXT_VERSION __DATE__ // maybe something else? :thinking:
 #define SVENBXT_GITHUB_URL "https://github.com/ScriptedSnark/SvenBXT"
 
+// INTERPROCESS & SVENSPLIT
+#define SVENSPLIT_PIPE_NAME "SvenBXT-SvenSplit"
+
+enum class MessageType : unsigned char
+{
+	TIME = 0x00,
+	EVENT = 0x01
+};
+
+enum class EventType : unsigned char
+{
+	GAMEEND = 0x00,
+	MAPCHANGE = 0x01,
+	TIMER_RESET = 0x02,
+	TIMER_START = 0x03,
+	SS_ALEAPOFFAITH = 0x04
+};
+
+#include "interprocess.h"
+
 // WINDOWS
 #ifdef PLATFORM_WINDOWS
 #include <windows.h>

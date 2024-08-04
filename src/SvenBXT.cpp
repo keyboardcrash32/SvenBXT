@@ -295,6 +295,8 @@ void SvenBXT_Shutdown()
 
 	SvenBXT_UnhookEngine();
 	SvenBXT_UnhookClient();
+	
+	Interprocess::Shutdown();
 
 	g_bHasLoaded = false;
 }

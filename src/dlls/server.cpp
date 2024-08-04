@@ -11,6 +11,8 @@ void FASTCALL HOOKED_CNihilanth_DyingThink(void* thisptr)
 {
 	g_lpHUDTimer->TimerStop();
 
+	Interprocess::WriteGameEnd(Interprocess::GetTime());
+
 	ORIG_CNihilanth_DyingThink(thisptr);
 }
 
