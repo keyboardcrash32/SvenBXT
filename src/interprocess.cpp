@@ -1,8 +1,11 @@
 #include "interprocess.h"
-#include <windows.h>
 #include "Utils.h"
 #include "SvenBXT.h"
 #include "cl_dll/hud_timer.h"
+
+#ifdef PLATFORM_WINDOWS
+#include <windows.h>
+#endif
 
 namespace Interprocess
 {
